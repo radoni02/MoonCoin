@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
