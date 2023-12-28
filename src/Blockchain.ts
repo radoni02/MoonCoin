@@ -2,6 +2,7 @@ import {Block} from './Block'
 
 export class Blockchain{
     public chain : Block[];
+    public difficulty = 4;
 
     constructor()
     {
@@ -21,7 +22,7 @@ export class Blockchain{
     addBlock(newBlock : Block)
     {
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
         this.chain.push(newBlock);
     }
 

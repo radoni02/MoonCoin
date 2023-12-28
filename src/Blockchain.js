@@ -4,6 +4,7 @@ exports.Blockchain = void 0;
 var Block_1 = require("./Block");
 var Blockchain = /** @class */ (function () {
     function Blockchain() {
+        this.difficulty = 4;
         this.chain = [this.createGenesisBlock()];
     }
     Blockchain.prototype.createGenesisBlock = function () {
@@ -14,7 +15,7 @@ var Blockchain = /** @class */ (function () {
     };
     Blockchain.prototype.addBlock = function (newBlock) {
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
         this.chain.push(newBlock);
     };
     Blockchain.prototype.isChainValid = function () {
