@@ -1,19 +1,18 @@
 import * as CryptoJS from 'crypto-js';
+import {Transaction} from './Transaction'
 
  export class Block{
 
-    public index : number;
     public timestamp : number;
-    public data : any;
+    public transactions : Transaction[];
     public previousHash : string;
     public hash : string;
     public nonce :number;
 
-    constructor(index,timestamp,data,previousHash = '')
+    constructor(timestamp,transactions,previousHash = '')
     {
-        this.index = index;
         this.timestamp = timestamp;
-        this.data = data;
+        this.transactions = transactions;
         this.previousHash = previousHash;
         this.hash = this.calculateHash();
         this.nonce = 0;
@@ -21,7 +20,7 @@ import * as CryptoJS from 'crypto-js';
 
     calculateHash()
     {
-        return CryptoJS.SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
+        return CryptoJS.SHA256(this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).toString();
     } 
 
     mineBlock(difficulty)
