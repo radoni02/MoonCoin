@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Eliptic = require("elliptic");
+var ec = new Eliptic.ec('secp256k1');
+var key = ec.genKeyPair();
+var publicKey = key.getPublic('hex');
+var privateKey = key.getPrivate('hex');
+console.log();
+console.log('Private key: ', privateKey);
+console.log('Public key: ', publicKey);

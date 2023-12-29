@@ -11,7 +11,7 @@ var Blockchain = /** @class */ (function () {
         this.pendingTransactions = [];
     }
     Blockchain.prototype.createGenesisBlock = function () {
-        return new Block_1.Block(Date.now(), "Genesis block", "0");
+        return new Block_1.Block(Date.now(), [new Transaction_1.Transaction(null, null, 0)], "0");
     };
     Blockchain.prototype.getLatestBlock = function () {
         return this.chain[this.chain.length - 1];
@@ -31,7 +31,13 @@ var Blockchain = /** @class */ (function () {
         this.pendingTransactions = [new Transaction_1.Transaction(null, miningRewardAddress, this.miningReward)];
         //the above line is used to give the reward to the miner who creates and add this block to the blockchain, fromAddress is null because the miner received it from the system and not a specific user
     };
-    Blockchain.prototype.createTransaction = function (transation) {
+    Blockchain.prototype.addTransaction = function (transation) {
+        if (!transation.fromAddress || !transation.toAddress) {
+            throw new Error('Transaction must include fromAddress and toAddress');
+        }
+        if (!transation.isValid()) {
+            throw new Error('Cannot add invalid transaction to chain');
+        }
         this.pendingTransactions.push(transation);
     };
     Blockchain.prototype.getBalaceOfAddress = function (address) {
@@ -54,6 +60,8 @@ var Blockchain = /** @class */ (function () {
         for (var i = 1; i < this.chain.length; i++) {
             var currentBlock = this.chain[i];
             var previousBlock = this.chain[i - 1];
+            if (!currentBlock.hasValidTransactions())
+                return false;
             if (currentBlock.hash !== currentBlock.calculateHash())
                 return false;
             if (currentBlock.previousHash !== previousBlock.hash)

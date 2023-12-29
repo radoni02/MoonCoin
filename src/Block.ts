@@ -9,7 +9,7 @@ import {Transaction} from './Transaction'
     public hash : string;
     public nonce :number;
 
-    constructor(timestamp,transactions,previousHash = '')
+    constructor(timestamp : number,transactions : Transaction[],previousHash = '')
     {
         this.timestamp = timestamp;
         this.transactions = transactions;
@@ -23,7 +23,7 @@ import {Transaction} from './Transaction'
         return CryptoJS.SHA256(this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).toString();
     } 
 
-    mineBlock(difficulty)
+    mineBlock(difficulty: number)
     {
         while(this.hash.substring(0,difficulty) !== Array(difficulty+1).join("0"))
         {
@@ -31,5 +31,17 @@ import {Transaction} from './Transaction'
             this.hash = this.calculateHash();
         }
         console.log("Block mined:" + this.hash);
+    }
+
+    hasValidTransactions()
+    {
+        for(const trans of this.transactions)
+        {
+            if(!trans.isValid())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
