@@ -7,8 +7,11 @@ const ec = new Eliptic.ec('secp256k1');
 const myKey = ec.keyFromPrivate('12d64651ef419f6cb8e31bd831fe079e3a90d4049c4342bac94f74ea9c8624da');
 const myWalletAddress = myKey.getPublic('hex');
 
-const tx1 = new Transaction(myWalletAddress,"real public key of another user",5)
+const tx1 = new Transaction(myWalletAddress,"real public key of another user",5);
 tx1.signTransaction(myKey);
+
+const tx2 = new Transaction(myWalletAddress,"real public key of another user",50);
+tx2.signTransaction(myKey);
 
 
 let moonCoin = new Blockchain();
@@ -27,7 +30,9 @@ moonCoin.minePendingTransactions("address3");
 moonCoin.minePendingTransactions("address3");
 // console.log('\nBlance of address3 is ',moonCoin.getBalaceOfAddress('address3'));
 
-
+moonCoin.minePendingTransactions("address3");
+moonCoin.minePendingTransactions("address3");
+moonCoin.minePendingTransactions("address3");
 // console.log("Mineing block 1...");
 // moonCoin.addBlock(new Block(1,"10/07/2023",{amount: 4}));
 
