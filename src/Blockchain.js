@@ -7,6 +7,7 @@ var Blockchain = /** @class */ (function () {
     function Blockchain() {
         this.difficulty = 2;
         this.miningReward = 100;
+        this.amountOfTransactionsInOneBlock = 2000;
         this.chain = [this.createGenesisBlock()];
         this.pendingTransactions = [];
     }
@@ -23,12 +24,20 @@ var Blockchain = /** @class */ (function () {
     //     this.chain.push(newBlock);
     // }
     Blockchain.prototype.minePendingTransactions = function (miningRewardAddress) {
+        var result = this.silicePendingTransactionsBasedOnAmount(this.pendingTransactions);
+        var movedTransactions = [];
+        if (result !== false) {
+            var remaining = result[0], moved = result[1];
+            movedTransactions = moved;
+            this.pendingTransactions = remaining;
+        }
         var block = new Block_1.Block(Date.now(), this.pendingTransactions);
         block.previousHash = this.getLatestBlock().hash;
         block.mineBlock(this.difficulty);
         console.log('Block successfully mined!');
         this.chain.push(block);
-        this.pendingTransactions = [new Transaction_1.Transaction(null, miningRewardAddress, this.miningReward)];
+        this.pendingTransactions = [new Transaction_1.Transaction(null, miningRewardAddress, this.miningReward)]
+            .concat(movedTransactions);
         //the above line is used to give the reward to the miner who creates and add this block to the blockchain, fromAddress is null because the miner received it from the system and not a specific user
     };
     Blockchain.prototype.addTransaction = function (transation) {
@@ -68,6 +77,15 @@ var Blockchain = /** @class */ (function () {
                 return false;
         }
         return true;
+    };
+    Blockchain.prototype.silicePendingTransactionsBasedOnAmount = function (pendingTransactions) {
+        if (pendingTransactions.length > this.amountOfTransactionsInOneBlock) {
+            console.log('The specified number of transactions is transferred to the next block');
+            var movedTransactions = pendingTransactions.slice(this.amountOfTransactionsInOneBlock);
+            var remainingTransactions = pendingTransactions.slice(0, this.amountOfTransactionsInOneBlock);
+            return [remainingTransactions, movedTransactions];
+        }
+        return false;
     };
     return Blockchain;
 }());

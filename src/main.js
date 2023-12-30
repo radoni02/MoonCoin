@@ -8,6 +8,8 @@ var myKey = ec.keyFromPrivate('12d64651ef419f6cb8e31bd831fe079e3a90d4049c4342bac
 var myWalletAddress = myKey.getPublic('hex');
 var tx1 = new Transaction_1.Transaction(myWalletAddress, "real public key of another user", 5);
 tx1.signTransaction(myKey);
+var tx2 = new Transaction_1.Transaction(myWalletAddress, "real public key of another user", 50);
+tx2.signTransaction(myKey);
 var moonCoin = new Blockchain_1.Blockchain();
 moonCoin.addTransaction(tx1);
 // moonCoin.addTransaction(new Transaction("address1","address2",5));
@@ -17,6 +19,9 @@ moonCoin.minePendingTransactions("address3");
 // moonCoin.addTransaction(new Transaction("address2","address1",30));
 moonCoin.minePendingTransactions("address3");
 // console.log('\nBlance of address3 is ',moonCoin.getBalaceOfAddress('address3'));
+moonCoin.minePendingTransactions("address3");
+moonCoin.minePendingTransactions("address3");
+moonCoin.minePendingTransactions("address3");
 // console.log("Mineing block 1...");
 // moonCoin.addBlock(new Block(1,"10/07/2023",{amount: 4}));
 // console.log("Mineing block 2...");
