@@ -2,9 +2,7 @@
   "dependencies": {
     "@types/crypto-js": "^4.2.1",
     "crypto-js": "^4.2.0",
-    "elliptic": "^6.5.4",
-    "object-sizeof": "^2.6.3",
-    "v8": "^0.1.0"
+    "elliptic": "^6.5.4"
   },
   "devDependencies": {
     "@types/elliptic": "^6.4.18",

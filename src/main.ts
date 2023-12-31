@@ -13,11 +13,15 @@ tx1.signTransaction(myKey);
 const tx2 = new Transaction(myWalletAddress,"real public key of another user",50);
 tx2.signTransaction(myKey);
 
+const tx3 = new Transaction(myWalletAddress,"real public key of another user",54);
+tx3.signTransaction(myKey);
+
 
 let moonCoin = new Blockchain();
 
 moonCoin.addTransaction(tx1);
-
+moonCoin.addTransaction(tx2);
+moonCoin.addTransaction(tx3);
 // moonCoin.addTransaction(new Transaction("address1","address2",5));
 // moonCoin.addTransaction(new Transaction("address2","address1",3));
 
@@ -31,8 +35,7 @@ moonCoin.minePendingTransactions("address3");
 // console.log('\nBlance of address3 is ',moonCoin.getBalaceOfAddress('address3'));
 
 moonCoin.minePendingTransactions("address3");
-moonCoin.minePendingTransactions("address3");
-moonCoin.minePendingTransactions("address3");
+
 // console.log("Mineing block 1...");
 // moonCoin.addBlock(new Block(1,"10/07/2023",{amount: 4}));
 

@@ -7,7 +7,7 @@ var Blockchain = /** @class */ (function () {
     function Blockchain() {
         this.difficulty = 2;
         this.miningReward = 100;
-        this.amountOfTransactionsInOneBlock = 2000;
+        this.amountOfTransactionsInOneBlock = 2;
         this.chain = [this.createGenesisBlock()];
         this.pendingTransactions = [];
     }
