@@ -6,6 +6,7 @@ import { BlockchainViewerComponent } from './components/blockchain-viewer/blockc
 import { CommonModule } from '@angular/common';
 import { BlockchainService } from './services/blockchain.service';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app.routes';
 
 
 @NgModule({
@@ -16,9 +17,10 @@ import { FormsModule } from '@angular/forms';
     // ... other components, directives, and pipes
   ],
   imports: [
-    BrowserModule,
-    CommonModule,
-    FormsModule
+     BrowserModule,
+     AppRoutingModule
+    // CommonModule,
+    // FormsModule
     // ... other imported modules
   ],
   providers: [

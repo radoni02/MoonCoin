@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import EC from 'elliptic';
 import {Blockchain} from '../../../../../backend/src/Blockchain';
+import {Block} from '../../../../../backend/src/Block';
 import { walletKey } from '../models/WalletKey';
 
 
@@ -16,6 +17,7 @@ export class BlockchainService {
   constructor() { 
     this.blockchainInstance.difficulty = 1;
     this.blockchainInstance.amountOfTransactionsInOneBlock = 5;
+    this.blockchainInstance.minePendingTransactions('my-wallet-address');
     this.blockchainInstance.minePendingTransactions('my-wallet-address');
 
     this.generateWalletKeys();
@@ -38,5 +40,10 @@ export class BlockchainService {
       }
     );
   }
+
+  addTransaction(transaction: any){
+    this.blockchainInstance.addTransaction(transaction);
+  }
+  
   
 }
