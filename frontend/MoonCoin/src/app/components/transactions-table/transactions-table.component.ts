@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { transactionDto } from '../../models/TransactionDto';
 
 @Component({
   selector: 'app-transactions-table',

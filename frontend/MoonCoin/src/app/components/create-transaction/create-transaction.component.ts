@@ -1,7 +1,7 @@
 import { Component ,OnInit} from '@angular/core';
 import { BlockchainService } from '../../services/blockchain.service';
-import { transactionDto } from '../../models/TransactionDto';
 import { FormsModule } from '@angular/forms';
+import {Transaction} from '../../../../../../backend/src/Transaction';
 
 @Component({
   selector: 'app-create-transaction',
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class CreateTransactionComponent implements OnInit{
 
  
-  public newTransaction : any;
+  public newTransaction! : Transaction;
   public walletKey;
   
 
@@ -31,16 +31,12 @@ export class CreateTransactionComponent implements OnInit{
     //signTransaction not a function so the name is other(check in backend) or I need to strong-type this property
 
     this.blockchainService.addTransaction(this.newTransaction);
+    console.log('asdasd');
     this.clearTransaction();
   }
 
   private clearTransaction()
   {
-    this.newTransaction = {
-      fromAddress: '',
-      toAddress: '',
-      amount: 0,
-      signature: ''
-    }
+    this.newTransaction =  new Transaction("","",0);
   }
 }

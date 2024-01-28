@@ -19,7 +19,6 @@ export class BlockchainService {
     this.blockchainInstance.amountOfTransactionsInOneBlock = 5;
     this.blockchainInstance.minePendingTransactions('my-wallet-address');
     this.blockchainInstance.minePendingTransactions('my-wallet-address');
-
     this.generateWalletKeys();
   }
 
@@ -44,6 +43,16 @@ export class BlockchainService {
   addTransaction(transaction: any){
     this.blockchainInstance.addTransaction(transaction);
   }
-  
+
+  getPendingTransaction()
+  {
+    return this.blockchainInstance.pendingTransactions;
+  }
+
+  minePendingTransaction(){
+    this.blockchainInstance.minePendingTransactions(this.walletKeys[0].publicKey);
+    //here need to change when will refactor code to be able to login to other accounts.
+    //change from walletKeys[0] to implementation where each user will have their own keys.
+  }
   
 }
