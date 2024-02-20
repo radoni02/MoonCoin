@@ -1,8 +1,0 @@
-{
-  "routes": [
-    "/",
-    "/new/transaction",
-    "/new/transaction/pending",
-    "/settings"
-  ]
-}
